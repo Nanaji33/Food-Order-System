@@ -40,7 +40,7 @@
         stage("Sonar Quality Gate") {
             steps {
                 script {
-                    timeout(time: 10, unit: 'MINUTES') {
+                    timeout(time: 5, unit: 'MINUTES') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             error "Pipeline failed due to quality gate: ${qg.status}"
@@ -66,7 +66,7 @@
                         groupId: 'com.example',
                         version: snapshotVersion,
                         repository: 'maven-snapshots',
-                        credentialsId: 'nexus-creds',
+                        credentialsId: 'jenkins-nexus-creds',
                         artifacts: [
                             [
                                 artifactId: 'anagrams',
